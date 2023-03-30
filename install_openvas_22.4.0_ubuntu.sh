@@ -614,9 +614,9 @@ sudo systemctl enable gsad
 
 #Downloading the data from the Greenbone Community Feed
 sudo -u gvm greenbone-feed-sync
-#sudo -u gvm greenbone-feed-sync --type GVMD_DATA
-#sudo -u gvm greenbone-feed-sync --type SCAP
-#sudo -u gvm greenbone-feed-sync --type CERT
+sudo -u gvm greenbone-feed-sync --type GVMD_DATA
+sudo -u gvm greenbone-feed-sync --type SCAP
+sudo -u gvm greenbone-feed-sync --type CERT
 
 #Once you've finished the feed synchronisation, generate GVM certificates.
 sudo -u gvm gvm-manage-certs -a
