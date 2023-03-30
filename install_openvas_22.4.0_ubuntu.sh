@@ -613,7 +613,7 @@ sudo systemctl enable gvmd
 sudo systemctl enable gsad
 
 #Downloading the data from the Greenbone Community Feed
-sudo -u gvm greenbone-feed-sync
+sudo -u gvm greenbone-nvt-sync
 sudo -u gvm greenbone-feed-sync --type GVMD_DATA
 sudo -u gvm greenbone-feed-sync --type SCAP
 sudo -u gvm greenbone-feed-sync --type CERT
