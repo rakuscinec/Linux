@@ -46,10 +46,10 @@ echo "8AE4BE429B60A59B311C2E739823FAA60ED1E580:6:" > /tmp/ownertrust.txt
 gpg --import-ownertrust < /tmp/ownertrust.txt
 
 #Setting a GVM version as environment variable
-export GVM_VERSION=22.4.1
+#export GVM_VERSION=22.4.1
 
 #Setting the gvm-libs version to use
-export GVM_LIBS_VERSION=22.4.4
+export GVM_LIBS_VERSION=22.7.0
 
 #Required dependencies for gvm-libs
 sudo apt install -y \
@@ -71,7 +71,6 @@ sudo apt install -y \
 
 #Downloading the gvm-libs sources
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
-tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 
 #Building gvm-libs
 mkdir -p $BUILD_DIR/gvm-libs && cd $BUILD_DIR/gvm-libs
@@ -90,14 +89,14 @@ make DESTDIR=$INSTALL_DIR/gvm-libs install
 sudo cp -rv $INSTALL_DIR/gvm-libs/* /
 
 #Setting the gvmd version to use
-export GVMD_VERSION=22.4.2
+export GVMD_VERSION=22.8.0
 
 #Required dependencies for gvmd
 sudo apt install -y \
   libglib2.0-dev \
   libgnutls28-dev \
   libpq-dev \
-  postgresql-server-dev-14 \
+  postgresql-server-dev-15 \
   libical-dev \
   xsltproc \
   rsync \
@@ -129,7 +128,6 @@ sudo apt install -y --no-install-recommends \
 
 #Downloading the gvmd sources
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
-tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
 
 #Building gvmd
 mkdir -p $BUILD_DIR/gvmd && cd $BUILD_DIR/gvmd
@@ -144,10 +142,9 @@ cmake $SOURCE_DIR/gvmd-$GVMD_VERSION \
   -DOPENVAS_DEFAULT_SOCKET=/run/ospd/ospd-openvas.sock \
   -DGVM_FEED_LOCK_PATH=/var/lib/gvm/feed-update.lock \
   -DSYSTEMD_SERVICE_DIR=/lib/systemd/system \
-  -DLOGROTATE_DIR=/etc/logrotate.d \
-  -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql
+  -DLOGROTATE_DIR=/etc/logrotate.d
 
-  make -j$(nproc)
+make -j$(nproc)
 
 #Installing gvmd
 mkdir -p $INSTALL_DIR/gvmd
@@ -155,7 +152,7 @@ make DESTDIR=$INSTALL_DIR/gvmd install
 sudo cp -rv $INSTALL_DIR/gvmd/* /
 
 #Setting the pg-gvm version to use
-export PG_GVM_VERSION=22.4.0
+export PG_GVM_VERSION=22.6.1
 
 #Required dependencies for pg-gvm
 sudo apt install -y \
@@ -182,7 +179,7 @@ make DESTDIR=$INSTALL_DIR/pg-gvm install
 sudo cp -rv $INSTALL_DIR/pg-gvm/* /
 
 #Setting the GSA version to use
-export GSA_VERSION=$GVM_VERSION
+export GSA_VERSION=22.6.0
 
 #Install nodejs 14
 export NODE_VERSION=node_14.x
@@ -222,7 +219,7 @@ sudo mkdir -p $INSTALL_PREFIX/share/gvm/gsad/web/
 sudo cp -rv build/* $INSTALL_PREFIX/share/gvm/gsad/web/
 
 #Setting the GSAd version to use
-export GSAD_VERSION=$GVM_VERSION
+export GSAD_VERSION=22.5.2
 
 #Required dependencies for gsad
 sudo apt install -y \
@@ -255,7 +252,7 @@ make DESTDIR=$INSTALL_DIR/gsad install
 sudo cp -rv $INSTALL_DIR/gsad/* /
 
 #Setting the openvas-smb version to use
-export OPENVAS_SMB_VERSION=22.4.0
+export OPENVAS_SMB_VERSION=22.5.3
 
 #Required dependencies for openvas-smb
 sudo apt install -y \
@@ -286,7 +283,7 @@ make DESTDIR=$INSTALL_DIR/openvas-smb install
 sudo cp -rv $INSTALL_DIR/openvas-smb/* /
 
 #Setting the openvas-scanner version to use
-export OPENVAS_SCANNER_VERSION=$GVM_VERSION
+export OPENVAS_SCANNER_VERSION=22.7.4
 
 #Required dependencies for openvas-scanner
 sudo apt install -y \
@@ -330,7 +327,7 @@ make DESTDIR=$INSTALL_DIR/openvas-scanner install
 sudo cp -rv $INSTALL_DIR/openvas-scanner/* /
 
 #Setting the ospd and ospd-openvas versions to use
-export OSPD_OPENVAS_VERSION=22.4.6
+export OSPD_OPENVAS_VERSION=22.6.0
 
 #Required dependencies for ospd-openvas
 sudo apt install -y \
@@ -359,7 +356,7 @@ python3 -m pip install --root=$INSTALL_DIR/ospd-openvas --no-warn-script-locatio
 sudo cp -rv $INSTALL_DIR/ospd-openvas/* /
 
 #Setting the notus version to use
-export NOTUS_VERSION=22.4.4
+export NOTUS_VERSION=22.6.0
 
 #Required dependencies for notus-scanner
 sudo apt install -y \
