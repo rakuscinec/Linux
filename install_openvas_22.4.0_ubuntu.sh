@@ -71,6 +71,7 @@ sudo apt install -y \
 
 #Downloading the gvm-libs sources
 curl -f -L https://github.com/greenbone/gvm-libs/archive/refs/tags/v$GVM_LIBS_VERSION.tar.gz -o $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
+tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvm-libs-$GVM_LIBS_VERSION.tar.gz
 
 #Building gvm-libs
 mkdir -p $BUILD_DIR/gvm-libs && cd $BUILD_DIR/gvm-libs
@@ -128,6 +129,7 @@ sudo apt install -y --no-install-recommends \
 
 #Downloading the gvmd sources
 curl -f -L https://github.com/greenbone/gvmd/archive/refs/tags/v$GVMD_VERSION.tar.gz -o $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
+tar -C $SOURCE_DIR -xvzf $SOURCE_DIR/gvmd-$GVMD_VERSION.tar.gz
 
 #Building gvmd
 mkdir -p $BUILD_DIR/gvmd && cd $BUILD_DIR/gvmd
